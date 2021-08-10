@@ -5,10 +5,19 @@ pipeline {
         IMAGE_NAME = 'sn2020/demo-app:java-npm-app-1.0'
     }
     stages {
-        stage('build app') {
+        stage ('increment version'){
+            steps {
+                script{
+                    echo 'incrementing major version'
+                    sh 'npm version major'
+                }
+            }
+        }
+        stage('test app') {
             steps {
                script {
-                  echo 'building application jar...'
+                  echo 'test application jar...'
+                  sh 'npm test'
                 }
             }
         }
@@ -16,6 +25,11 @@ pipeline {
             steps {
                 script {
                    echo 'building docker image...'
+                   withCredentials([usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PASS' , usernameVariable: 'USER')]) {
+                        sh 'docker build -t snegi2020/demo-app:image-1.0 .'
+                        sh "echo $PASS | docker login -u $USER --passowrd-stdin "
+                        sh 'docker push snegi2020/demo-app:image-1.0 '
+                    }
                    //buildImage(env.IMAGE_NAME)
                    //dockerLogin()
                    //dockerPush(env.IMAGE_NAME)
