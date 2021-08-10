@@ -11,8 +11,9 @@ pipeline {
                   echo 'increment version...'
                   dir ('app') {
                     sh 'pwd'
+                    sh 'npm version major'
                   }
-                  sh 'npm version major'
+                  //sh 'npm version major'
                 }
             }
         }
