@@ -22,7 +22,9 @@ pipeline {
             steps {
                script {
                   echo 'test application jar...'
-                  sh 'npm test'
+                  dir ('app') {
+                    sh 'npm test'
+                  }
                 }
             }
         }
