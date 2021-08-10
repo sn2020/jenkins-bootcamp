@@ -8,6 +8,7 @@ pipeline {
         stage('increment version') {
             steps {
                script {
+                  #!/bin/bash
                   echo 'increment version...'
                   cd ./app
                   sh 'npm version major'
