@@ -12,10 +12,12 @@ pipeline {
                   dir ('app') {
                     sh 'pwd'
                     sh 'npm version major'
-                    def matcher = readFile('package.json') =~ '"version": (.+)'
-                    def version = matcher[0]
-                    echo "$version"
-                    env.IMAGE_NAME = "$version-$BUILD_NUMBER"
+                    //def matcher = readFile('package.json') =~ '"version": (.+)'
+                    //def version = matcher[0][1]
+                    def packageJSON = readJSON file: 'package.json'
+                    def packageJSONVersion = packageJSON.version
+                    echo "$packageJSONVersion"
+                    //env.IMAGE_NAME = "$version-$BUILD_NUMBER"
                   }
                 }
             }
