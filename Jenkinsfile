@@ -14,10 +14,10 @@ pipeline {
                     sh 'npm version major'
                     //def matcher = readFile('package.json') =~ '"version": (.+)'
                     //def version = matcher[0][1]
-                    def packageJSON = readJSON file: 'package.json'
-                    def packageJSONVersion = packageJSON.version
-                    echo "$packageJSONVersion"
                     //env.IMAGE_NAME = "$version-$BUILD_NUMBER"
+                    VERSION=$(npm version patch)
+                    VERSION=$(echo $VERSION | cut -c 2-)
+                    echo "$VERSION"
                   }
                 }
             }
