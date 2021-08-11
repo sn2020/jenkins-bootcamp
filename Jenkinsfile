@@ -15,9 +15,13 @@ pipeline {
                     //def matcher = readFile('package.json') =~ '"version": (.+)'
                     //def version = matcher[0][1]
                     //env.IMAGE_NAME = "$version-$BUILD_NUMBER"
-                    def VERSION=$(npm version patch)
-                    VERSION=$(echo $VERSION | cut -c 2-)
-                    echo "$VERSION"
+                    def PACKAGE_VERSION=$(cat package.json \
+                    | grep version \
+                    | head -1 \
+                    | awk -F: '{ print $2 }' \
+                    | sed 's/[",]//g')
+
+                    
                   }
                 }
             }
