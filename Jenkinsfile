@@ -13,7 +13,7 @@ pipeline {
                     sh 'pwd'
                     sh 'npm version major'
                     def matcher = readFile('package.json') =~ '"version": (.+)'
-                    def version = matcher[0][1]
+                    def version = matcher[0]
                     echo "$version"
                     env.IMAGE_NAME = "$version-$BUILD_NUMBER"
                   }
