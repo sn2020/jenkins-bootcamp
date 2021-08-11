@@ -15,7 +15,7 @@ pipeline {
                     //def matcher = readFile('package.json') =~ '"version": (.+)'
                     //def version = matcher[0][1]
                     //env.IMAGE_NAME = "$version-$BUILD_NUMBER"
-                    VERSION=$(npm version patch)
+                    def VERSION=$(npm version patch)
                     VERSION=$(echo $VERSION | cut -c 2-)
                     echo "$VERSION"
                   }
