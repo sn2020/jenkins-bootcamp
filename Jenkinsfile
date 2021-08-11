@@ -12,8 +12,10 @@ pipeline {
                   dir ('app') {
                     sh 'pwd'
                     sh 'npm version major'
+                    def matcher = readFile('package.json') =~ '"version": (.+)'
+                    def version = matcher[0][1]
+                    env.IMAGE_NAME = "$version-$BUILD_NUMBER"
                   }
-                  //sh 'npm version major'
                 }
             }
         }
@@ -29,6 +31,18 @@ pipeline {
             }
         }
         
+        stage('docker image build') {
+            steps {
+                script {
+                    echo 'building docker image'
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PASS' , usernameVariable: 'USER')]) {
+                       sh "docker build -t snegi2020/demo-app:${IMAGE_NAME} ."
+                       sh "echo $PASS | docker login -u $USER --passowrd-stdin "
+                       sh "docker push snegi2020/demo-app:${IMAGE_NAME}" 
+                    }                
+                }
+            }
+        }
         stage('deploy') {
             steps {
                 script {
