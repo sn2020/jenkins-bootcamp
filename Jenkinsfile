@@ -15,11 +15,8 @@ pipeline {
                     //def matcher = readFile('package.json') =~ '"version": (.+)'
                     //def version = matcher[0][1]
                     //env.IMAGE_NAME = "$version-$BUILD_NUMBER"
-
-                    //def PACKAGE_VERSION=$(readFile ('package.json') | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g')
-                    //echo $PACKAGE_VERSION
-                    props = readJSON file: 'package.json'
-                    echo ${props.version}
+                    var pjson = require('package.json');
+                    console.log(pjson.version);
                   }
                 }
             }
