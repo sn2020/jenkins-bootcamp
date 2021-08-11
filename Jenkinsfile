@@ -1,9 +1,9 @@
 pipeline {
     agent any
     
-    environment {
-        IMAGE_NAME = 'sn2020/demo-app:java-npm-app-1.0'
-    }
+    //environment {
+      //  IMAGE_NAME = 'sn2020/demo-app:java-npm-app-1.0'
+    //}
     stages {
         stage('increment version') {
             steps {
