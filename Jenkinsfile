@@ -12,11 +12,11 @@ pipeline {
                   dir ('app') {
                     sh 'pwd'
                     sh 'npm version major'
-                    //def matcher = readFile('package.json') =~ '"version": (.+)'
-                    //def version = matcher[0][1]
-                    //env.IMAGE_NAME = "$version-$BUILD_NUMBER"
-                    var pjson = require('package.json');
-                    console.log(pjson.version);
+                    def matcher = readFile('package.json') =~ '"version": (.+)'
+                    echo ${matcher}
+                    def version = matcher[0][1]
+                    echo ${version}
+                    env.IMAGE_NAME = "$version-$BUILD_NUMBER"
                   }
                 }
             }
