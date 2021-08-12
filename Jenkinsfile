@@ -12,11 +12,13 @@ pipeline {
                   dir ('app') {
                     sh 'pwd'
                     sh 'npm version major'
-                    def matcher = readFile('package.json') =~ '"version": (.+)'
-                    echo ${matcher}
-                    def version = matcher[0][1]
-                    echo ${version}
-                    env.IMAGE_NAME = "$version-$BUILD_NUMBER"
+                    //def matcher = readFile('package.json') =~ '"version": (.+)'
+                    //echo ${matcher}
+                    //def version = matcher[0][1]
+                    //echo ${version}
+                    //env.IMAGE_NAME = "$version-$BUILD_NUMBER"
+                    def currrentversion = npm run env | grep npm_package_version | cut -d '=' -f 2
+                    echo ${currrentversion}
                   }
                 }
             }
