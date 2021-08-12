@@ -17,7 +17,8 @@ pipeline {
                     //def version = matcher[0][1]
                     //echo ${version}
                     //env.IMAGE_NAME = "$version-$BUILD_NUMBER"
-                    def currrentversion = {sh 'npm run env'} | {grep 'npm_package_version'} | {cut -d "=" -f 2}
+                    //def currrentversion = {sh 'npm run env'} | {grep 'npm_package_version'} | {cut -d "=" -f 2}
+                    def currrentversion = awk -F'"' '/"version": ".+"/{ print $4; exit; }' package.json
                     echo ${currrentversion}
                   }
                 }
