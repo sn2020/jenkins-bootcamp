@@ -10,10 +10,10 @@ pipeline {
                script {
                   echo 'increment version...'
                   dir ('app') {
-                    sh 'pwd'
+                    //sh 'pwd'
                     sh 'npm version major'
                     def matcher = readFile('package.json') =~ '"version": (.+)'
-                    echo ${matcher}
+                    echo "Matcher is:" ${matcher}
                     def version = matcher[0][1]
                     echo "new version is :" ${version}
                     env.IMAGE_NAME = "$version-$BUILD_NUMBER"
