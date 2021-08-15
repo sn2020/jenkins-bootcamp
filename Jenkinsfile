@@ -17,9 +17,9 @@ pipeline {
                     //def version = matcher[0][1]
                     //env.IMAGE_NAME = "$version-$BUILD_NUMBER"
                     props = readJSON file: 'package.json'
-                    echo "prop version: "props.version
+                    echo props.version
                     env.IMAGE_NAME = "$props.version-$BUILD_NUMBER"
-                    echo "env image name :" "${env.IMAGE_NAME}"
+                    echo "${BUILD_NUMBER}"
                   }
                 }
             }
