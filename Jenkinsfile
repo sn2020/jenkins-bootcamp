@@ -9,15 +9,17 @@ pipeline {
             steps {
                script {
                   echo 'increment version...'
-                  dir ('app') {
-                    //sh 'pwd'
+                  dir ('app') { //Same as cd app
+                    sh "pwd"
+                    sh "npm install" //Builds the node application
                     sh 'npm version major'
-                    def matcher = readFile('package.json') =~ '"version": (.+)'
-                    echo "Matcher is:" ${matcher}
-                    def version = matcher[0][1]
-                    echo "new version is :" ${version}
-                    env.IMAGE_NAME = "$version-$BUILD_NUMBER"
-                    echo ${env.IMAGE_NAME}
+                    //def matcher = readFile('package.json') =~ '"version": (.+)'
+                    //def version = matcher[0][1]
+                    //env.IMAGE_NAME = "$version-$BUILD_NUMBER"
+                    props = readJSON file: 'package.json'
+                    echo props.version
+                    env.IMAGE_NAME = "$props.version-$BUILD_NUMBER"
+                    echo "${env.IMAGE_NAME}"
                   }
                 }
             }
