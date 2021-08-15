@@ -15,13 +15,9 @@ pipeline {
                     def matcher = readFile('package.json') =~ '"version": (.+)'
                     echo ${matcher}
                     def version = matcher[0][1]
-                    echo ${version}
+                    echo "new version is :" ${version}
                     env.IMAGE_NAME = "$version-$BUILD_NUMBER"
-                    
-                    //def currrentversion = {sh 'npm run env'} 
-                    //echo "${currrentversion}"
-                    //def versioncopy1 = ${currrentversion} | grep "npm_package_version"| cut -d '=' -f 2
-                    //echo "${versioncopy1}"
+                    echo ${env.IMAGE_NAME}
                   }
                 }
             }
