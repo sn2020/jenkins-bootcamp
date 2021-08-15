@@ -13,7 +13,7 @@ pipeline {
                     sh "pwd"
                     sh "npm install" //Builds the node application
                     sh 'npm version major'
-                    props = readJSON file: 'package.json'
+                    def props = readJSON file: 'package.json'
                     echo props.version
                     env.IMAGE_NAME = "$props.version-$BUILD_NUMBER"
                     echo "${BUILD_NUMBER}"
