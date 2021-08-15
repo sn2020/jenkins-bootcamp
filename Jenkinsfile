@@ -5,17 +5,14 @@ pipeline {
       //  IMAGE_NAME = 'sn2020/demo-app:java-npm-app-1.0'
     //}
     stages {
-        stage('increment version') {
+        stage('Build') {
             steps {
                script {
-                  echo 'increment version...'
+                  echo 'Building nodejs'
                   dir ('app') { //Same as cd app
                     sh "pwd"
-                    //sh "npm install" //Builds the node application
+                    sh "npm install" //Builds the node application
                     sh 'npm version major'
-                    //def matcher = readFile('package.json') =~ '"version": (.+)'
-                    //def version = matcher[0][1]
-                    //env.IMAGE_NAME = "$version-$BUILD_NUMBER"
                     props = readJSON file: 'package.json'
                     echo props.version
                     env.IMAGE_NAME = "$props.version-$BUILD_NUMBER"
