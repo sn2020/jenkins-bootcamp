@@ -9,19 +9,16 @@ pipeline {
             steps {
                script {
                   echo 'Building nodejs'
-                  dir ('app') { //Same as cd app
+                  dir ('app') { 
                     sh "pwd"
-                    sh "npm install" //Builds the node application
+                    sh "npm install" 
                     sh 'npm version major'
-                    def version = sh(returnStdout: true, script: "npm version")
-                    echo "Version is ${version}"
-                    def versionProps = readJSON text: version
-                    echo "Project version is "${versionProps['project-name']}""
-                    //def props = readJSON file: 'package.json'
-                    //echo props.version
-                    //env.IMAGE_NAME = "$props.version-$BUILD_NUMBER"
-                    //echo "${BUILD_NUMBER}"
-                  }
+                    props = readJSON file: 'package.json'
+                    echo props.version
+                    env.IMAGE_NAME = "$props.version-${BUILD_NUMBER}"
+                    echo "${BUILD_NUMBER}"
+                    
+                    }
                 }
             }
         }
