@@ -23,7 +23,7 @@ pipeline {
             }
         }
         
-        stage('test app') {
+        stage('Test...') {
             steps {
                script {
                   echo 'test application jar...'
@@ -34,15 +34,15 @@ pipeline {
             }
         }
         
-        stage('docker image build') {
+        stage('Building Docker Image') {
             steps {
                 script {
                     echo 'building docker image'
-                    //withCredentials([usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PASS' , usernameVariable: 'USER')]) {
-                       //sh "docker build -t snegi2020/demo-app:${IMAGE_NAME} ."
-                       //sh "echo $PASS | docker login -u $USER --passowrd-stdin "
-                       //sh "docker push snegi2020/demo-app:${IMAGE_NAME}" 
-                    //}                
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PASS' , usernameVariable: 'USER')]) {
+                       sh "docker build -t snegi2020/demo-app:${IMAGE_NAME} ."
+                       sh "echo $PASS | docker login -u $USER --passowrd-stdin "
+                       sh "docker push snegi2020/demo-app:${IMAGE_NAME}" 
+                    }                
                 }
             }
         }
