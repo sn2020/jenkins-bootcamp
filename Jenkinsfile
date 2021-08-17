@@ -42,6 +42,7 @@ pipeline {
                        sh "docker build -t snegi2020/demo-app:${IMAGE_NAME} ."
                        sh "echo $PASS | docker login -u $USER --passowrd-stdin "
                        sh "docker push snegi2020/demo-app:${IMAGE_NAME}" 
+                       echo "Pushed Docker Image successfuuly ${IMAGE_NAME}"
                     }                
                 }
             }
