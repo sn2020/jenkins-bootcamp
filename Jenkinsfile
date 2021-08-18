@@ -58,9 +58,9 @@ pipeline {
             steps {
                 script{
                     echo 'Comitting to Github repo '
-                    withCredentials([usernamePassword(credentialsId: 'mygithub-cred', passwordVariable: 'PASS' , usernameVariable: 'USER')]) {
-                       sh 'git config user.email "negi.supriya88@gmail.com"'
-                       sh 'git config user.name "sn2020"'
+                    withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'PASS' , usernameVariable: 'USER')]) {
+                       //sh 'git config user.email "negi.supriya88@gmail.com"'
+                       //sh 'git config user.name "sn2020"'
                        sh 'git config credential.helper store'
                        sh 'git status'
                        sh 'git branch'
