@@ -67,7 +67,7 @@ pipeline {
                        sh "echo $PASS | git remote set-url origin https://$USER:--password-stdin@github.com/sn2020/jenkins-bootcamp.git" 
                        sh "pwd"
                        sh "git add Jenkinsfile"
-                       sh "git commit -m "Version update" "
+                       sh "git commit "
                        sh "git push origin HEAD:main"
                     }
                 }
