@@ -54,5 +54,24 @@ pipeline {
                 }
             }
         }
+        stage('Commiting Version Update to GitHub') {
+            steps {
+                script{
+                    echo 'Comitting to Github repo '
+                    withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'PASS' , usernameVariable: 'USER')]) {
+                       sh "git config user.email "negi.supriya88@gmail.com"."
+                       sh "git config user.name "sn2020" "
+                       sh "git status"
+                       sh "git branch"
+                       sh "git config --list"
+                       sh "echo $PASS | git remote set-url origin https://$USER:--password-stdin@github.com/sn2020/jenkins-bootcamp.git" 
+                       sh "pwd"
+                       sh "git add Jenkinsfile"
+                       sh "git commit -m "Version update" "
+                       sh "git push origin HEAD:main"
+                    }
+                }
+            }
+        }
     }
 }
