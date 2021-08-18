@@ -61,9 +61,11 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'mygithub-cred', passwordVariable: 'PASS' , usernameVariable: 'USER')]) {
                        sh 'git config user.email "negi.supriya88@gmail.com"'
                        sh 'git config user.name "sn2020"'
+                       sh 'git config credential.helper store'
                        sh 'git status'
                        sh 'git branch'
                        sh 'git config --list'
+                       //sh "echo $PASS"
                        sh "echo $PASS | git remote set-url origin https://$USER:--password-stdin@github.com/sn2020/jenkins-bootcamp.git" 
                        sh "pwd"
                        sh "git add ."
