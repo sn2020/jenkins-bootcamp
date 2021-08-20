@@ -58,19 +58,24 @@ pipeline {
             steps {
                 script{
                     echo 'Comitting to Github repo '
-                    withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'PASS' , usernameVariable: 'USER')]) {
-                       //sh 'git config user.email "negi.supriya88@gmail.com"'
-                       //sh 'git config user.name "sn2020"'
-                       sh 'git config credential.helper store'
+                    
+                    //withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'PASS' , usernameVariable: 'USER')]) {
+                    withCredentials([string(credentialsId: 'mytoken', variable: 'TOKEN')]) {
+                      sh '''
+                       set +x
+                       sh 'git config user.name "sn2020"'
+                       //sh 'git config credential.helper store'
                        sh 'git status'
                        sh 'git branch'
                        sh 'git config --list'
-                       //sh "echo $PASS"
-                       sh "echo $PASS | git remote set-url origin https://$USER:--password-stdin@github.com/sn2020/jenkins-bootcamp.git" 
+                       
+                       //sh "echo $PASS | git remote set-url origin https://$USER:--password-stdin@github.com/sn2020/jenkins-bootcamp.git" 
+                       sh "git remote set-url origin https://$TOKEN@github.com/sn2020/jenkins-bootcamp.git"
                        sh "pwd"
                        sh "git add ."
                        sh 'git commit -m "version patched"'
                        sh "git push origin HEAD:main"
+                       '''
                     }
                 }
             }
