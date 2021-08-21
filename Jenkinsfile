@@ -60,7 +60,7 @@ pipeline {
                     echo 'Comitting to Github repo '
                     
                     //withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'PASS' , usernameVariable: 'USER')]) {
-                    withCredentials([usernamePassword(credentialsId: '0b32a879-2e37-42b9-b247-7f327c1b268d', variable: 'TOKEN')]) {
+                    withCredentials([string(credentialsId: "github", variable: "TOKEN")]) {
                       sh '''
                        set +x
                        sh 'git config user.name "sn2020"'
@@ -70,7 +70,7 @@ pipeline {
                        sh 'git config --list'
                        
                        //sh "echo $PASS | git remote set-url origin https://$USER:--password-stdin@github.com/sn2020/jenkins-bootcamp.git" 
-                       sh "git remote set-url origin https://$TOKEN@github.com/sn2020/jenkins-bootcamp.git"
+                       sh "git remote set-url origin https://$USER:$TOKEN@github.com/sn2020/jenkins-bootcamp.git"
                        sh "pwd"
                        sh "git add ."
                        sh 'git commit -m "version patched"'
