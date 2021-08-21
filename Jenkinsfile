@@ -59,11 +59,11 @@ pipeline {
                 script{
                     echo 'Comitting to Github repo '
                     
-                    //withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'PASS' , usernameVariable: 'USER')]) {
-                    withCredentials([string(credentialsId: "github", variable: "TOKEN")]) {
+                    withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'PASS' , usernameVariable: 'TOKEN')]) {
+                    //withCredentials([string(credentialsId: "github", variable: "TOKEN")]) {
                       sh '''
                        set +x
-                       sh 'git config user.name "sn2020"'
+                       //sh 'git config user.name "sn2020"'
                        //sh 'git config credential.helper store'
                        sh 'git status'
                        sh 'git branch'
