@@ -60,7 +60,7 @@ pipeline {
                     echo 'Comitting to Github repo '
                     
                     //withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'PASS' , usernameVariable: 'USER')]) {
-                    withCredentials([string(credentialsId: '0b32a879-2e37-42b9-b247-7f327c1b268d', variable: 'TOKEN')]) {
+                    withCredentials([usernamePassword(credentialsId: '0b32a879-2e37-42b9-b247-7f327c1b268d', variable: 'TOKEN')]) {
                       sh '''
                        set +x
                        sh 'git config user.name "sn2020"'
