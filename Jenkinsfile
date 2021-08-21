@@ -62,12 +62,12 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'PASS' , usernameVariable: 'TOKEN')]) {
                     //withCredentials([string(credentialsId: "github", variable: "TOKEN")]) {
                       ///sh '''
-                       set +x
+                       //set +x
                        //sh 'git config user.name "sn2020"'
                        //sh 'git config credential.helper store'
                        sh 'git status'
-                       sh 'git branch'
-                       sh 'git config --list'
+                       //sh 'git branch'
+                       //sh 'git config --list'
                        
                        //sh "echo $PASS | git remote set-url origin https://$USER:--password-stdin@github.com/sn2020/jenkins-bootcamp.git" 
                        sh "git remote set-url origin https://$USER:$TOKEN@github.com/sn2020/jenkins-bootcamp.git"
