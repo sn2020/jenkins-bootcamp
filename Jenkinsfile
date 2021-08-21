@@ -61,7 +61,7 @@ pipeline {
                     
                     withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'PASS' , usernameVariable: 'TOKEN')]) {
                     //withCredentials([string(credentialsId: "github", variable: "TOKEN")]) {
-                      sh '''
+                      ///sh '''
                        set +x
                        //sh 'git config user.name "sn2020"'
                        //sh 'git config credential.helper store'
@@ -75,7 +75,7 @@ pipeline {
                        sh "git add ."
                        sh 'git commit -m "version patched"'
                        sh "git push origin HEAD:main"
-                       '''
+                       ///'''
                     }
                 }
             }
